@@ -1,0 +1,330 @@
+INFO - 2019-05-04T09:47:33.652: Initial log.
+INFO - 2019-05-04T09:47:34.277: User 'a' logged in successfully.
+INFO - 2019-05-04T09:53:27.568: Initial log.
+INFO - 2019-05-04T09:53:28.183: User 'a' logged in successfully.
+INFO - 2019-05-04T09:54:39.168: Initial log.
+WARN - 2019-05-04T09:54:39.423: Access denied.
+INFO - 2019-05-04T22:51:34.407: New user with login'ssssss' created successfully.
+WARN - 2019-05-04T22:56:11.590: User 'ssssss' failed to log in. Reason: user is not registered.
+WARN - 2019-05-04T22:56:11.590: User 'ssssss' failed to log in. Reason: user is not registered.
+INFO - 2019-05-04T22:56:11.933: User 'ssssss' logged in successfully.
+INFO - 2019-05-04T22:56:11.933: User 'ssssss' logged in successfully.
+INFO - Table is loaded.
+INFO - Table is loaded.
+INFO - 2019-05-04T23:05:17.654: User 'ssssss' logged out.
+INFO - 2019-05-04T23:05:17.654: User 'ssssss' logged out.
+INFO - 2019-05-04T23:05:17.654: User 'ssssss' logged out.
+WARN - 2019-05-04T23:05:29.370: User 'енгнегнег' failed to log in. Reason: user is not registered.
+WARN - 2019-05-04T23:05:29.370: User 'енгнегнег' failed to log in. Reason: user is not registered.
+WARN - 2019-05-04T23:05:29.370: User 'енгнегнег' failed to log in. Reason: user is not registered.
+WARN - 2019-05-04T23:05:29.370: User 'енгнегнег' failed to log in. Reason: user is not registered.
+WARN - 2019-05-04T23:05:29.370: Access denied.
+WARN - 2019-05-04T23:05:29.370: Access denied.
+WARN - 2019-05-04T23:05:29.370: Access denied.
+WARN - 2019-05-04T23:05:29.370: Access denied.
+WARN - 2019-05-04T23:05:47.530: User 'a' failed to log in. Reason: user is not registered.
+WARN - 2019-05-04T23:05:47.530: User 'a' failed to log in. Reason: user is not registered.
+WARN - 2019-05-04T23:05:47.530: User 'a' failed to log in. Reason: user is not registered.
+WARN - 2019-05-04T23:05:47.530: User 'a' failed to log in. Reason: user is not registered.
+WARN - 2019-05-04T23:05:47.530: User 'a' failed to log in. Reason: user is not registered.
+WARN - 2019-05-04T23:05:47.530: Access denied.
+WARN - 2019-05-04T23:05:47.530: Access denied.
+WARN - 2019-05-04T23:05:47.530: Access denied.
+WARN - 2019-05-04T23:05:47.530: Access denied.
+WARN - 2019-05-04T23:05:47.530: Access denied.
+WARN - 2019-05-04T23:44:24.052: User 'a' failed to log in. Reason: user is not registered.
+WARN - 2019-05-04T23:44:24.054: Access denied.
+WARN - 2019-05-04T23:54:59.013: User 'a' failed to log in. Reason: user is not registered.
+WARN - 2019-05-04T23:54:59.015: Access denied.
+INFO - 2019-05-12T19:28:35.072: User 'a' logged in successfully.
+INFO - 2019-05-12T19:41:05.701: User 'a' logged in successfully.
+INFO - 2019-05-12T19:43:59.538: User 'a' logged in successfully.
+INFO - 2019-06-05T12:06:29.405: User 'a' logged in successfully.
+INFO - 2019-06-05T12:06:29.405: User 'a' logged in successfully.
+INFO - 2019-06-05T12:06:33.333Table is loaded.
+INFO - 2019-06-05T12:06:33.333Table is loaded.
+INFO - 2019-06-05T12:06:39.759: User 'a' logged out.
+INFO - 2019-06-05T12:06:39.759: User 'a' logged out.
+INFO - 2019-06-05T12:06:39.759: User 'a' logged out.
+INFO - 2019-08-02T14:18:39.792: User 'a' logged in successfully.
+INFO - 2019-08-02T14:18:42.389Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - 2019-08-02T14:20:52.234Table is loaded.
+INFO - New entry added.
+INFO - New entry added.
+INFO - New entry added.
+INFO - New entry added.
+INFO - New entry added.
+INFO - New entry added.
+INFO - New entry added.
+INFO - New entry added.
+INFO - New entry added.
+INFO - New entry added.
+INFO - New entry added.
+INFO - New entry added.
+INFO - New entry added.
+INFO - New entry added.
+INFO - New entry added.
+INFO - New entry added.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:22:50.650Table is loaded.
+INFO - 2019-08-02T14:24:42.089: User 'a' logged in successfully.
+INFO - 2019-08-02T14:24:42.089: User 'a' logged in successfully.
+INFO - 2019-08-02T14:24:57.911Table is loaded.
+INFO - 2019-08-02T14:24:57.911Table is loaded.
+INFO - 2019-08-02T14:29:17.796: User 'a' logged in successfully.
+INFO - 2019-08-02T14:29:35.645 Table is loaded.
+INFO - 2019-08-02T14:29:50.692 Table is loaded.
+INFO - 2019-08-02T14:29:50.692 Table is loaded.
+INFO - 2019-08-02T14:29:50.692 Table is loaded.
+INFO - 2019-08-02T14:35:24.792: User 'a' logged out.
+INFO - 2019-08-02T14:35:24.792: User 'a' logged out.
+INFO - 2019-08-02T14:35:24.792: User 'a' logged out.
+INFO - 2019-08-02T14:35:24.792: User 'a' logged out.
+INFO - 2019-08-02T15:00:14.164: User 'a' logged in successfully.
+INFO - 2019-08-02T15:00:17.683 Table is loaded.
+INFO - 2019-08-02T15:00:45.144 Table is loaded.
+INFO - 2019-08-02T15:04:18.075 Table is loaded.
+INFO - 2019-08-02T15:04:54.465 Table is loaded.
+INFO - 2019-08-02T15:06:33.896 Table is loaded.
+INFO - 2019-08-02T15:06:33.896 Table is loaded.
+INFO - 2019-08-02T15:07:14.330 Table is loaded.
+INFO - 2019-08-02T15:07:14.330 Table is loaded.
+INFO - 2019-08-02T15:07:14.330 Table is loaded.
+INFO - 2019-08-02T15:07:14.330 Table is loaded.
+INFO - 2019-08-02T15:07:15.193 Table is loaded.
+INFO - 2019-08-02T15:07:15.193 Table is loaded.
+INFO - 2019-08-02T15:07:15.193 Table is loaded.
+INFO - 2019-08-02T15:07:15.193 Table is loaded.
+INFO - 2019-08-02T15:07:15.597 Table is loaded.
+INFO - 2019-08-02T15:07:15.597 Table is loaded.
+INFO - 2019-08-02T15:07:15.597 Table is loaded.
+INFO - 2019-08-02T15:07:15.597 Table is loaded.
+INFO - 2019-08-02T15:07:15.756 Table is loaded.
+INFO - 2019-08-02T15:07:15.756 Table is loaded.
+INFO - 2019-08-02T15:07:15.756 Table is loaded.
+INFO - 2019-08-02T15:07:15.756 Table is loaded.
+INFO - 2019-08-02T15:14:06.717: User 'a' logged in successfully.
+INFO - 2019-08-02T15:14:07.970 Table is loaded.
+INFO - 2019-08-02T15:26:37.931: User 'a' logged in successfully.
+INFO - 2019-08-02T15:26:39.967 Table is loaded.
+INFO - 2019-08-02T15:26:59.327 Table is loaded.
+INFO - 2019-08-02T15:26:59.327 Table is loaded.
+INFO - 2019-08-02T15:26:59.327 Table is loaded.
+INFO - 2019-08-02T15:27:00.167: Entry with Web name 'apple.com' has been updated.
+INFO - 2019-08-02T15:27:00.167: Entry with Web name 'apple.com' has been updated.
+INFO - 2019-08-02T15:27:00.167: Entry with Web name 'apple.com' has been updated.
+INFO - 2019-08-02T15:29:35.767: User 'a' logged out.
+INFO - 2019-08-02T15:29:35.767: User 'a' logged out.
+INFO - 2019-08-02T15:29:35.767: User 'a' logged out.
+INFO - 2019-08-02T15:29:35.767: User 'a' logged out.
+WARN - 2019-08-02T15:29:38.819Incorrect login or password!
+WARN - 2019-08-02T15:29:38.819Incorrect login or password!
+WARN - 2019-08-02T15:29:38.819Incorrect login or password!
+WARN - 2019-08-02T15:29:38.819Incorrect login or password!
+WARN - 2019-08-02T15:29:38.819Incorrect login or password!
+WARN - 2019-08-02T15:29:38.820: Access denied.
+WARN - 2019-08-02T15:29:38.820: Access denied.
+WARN - 2019-08-02T15:29:38.820: Access denied.
+WARN - 2019-08-02T15:29:38.820: Access denied.
+WARN - 2019-08-02T15:29:38.820: Access denied.
+INFO - 2019-08-02T15:29:46.116: User 'root' logged in successfully.
+INFO - 2019-08-02T15:29:46.116: User 'root' logged in successfully.
+INFO - 2019-08-02T15:29:46.116: User 'root' logged in successfully.
+INFO - 2019-08-02T15:29:46.116: User 'root' logged in successfully.
+INFO - 2019-08-02T15:29:46.116: User 'root' logged in successfully.
+INFO - 2019-08-02T15:29:48.185 Table is loaded.
+INFO - 2019-08-02T15:29:48.185 Table is loaded.
+INFO - 2019-08-02T15:29:48.185 Table is loaded.
+INFO - 2019-08-02T15:29:48.185 Table is loaded.
+INFO - 2019-08-02T15:29:48.185 Table is loaded.
+INFO - 2019-08-02T15:45:18.473: User 'a' logged in successfully.
+INFO - 2019-08-02T15:45:19.610: User 'a' logged out.
+INFO - 2019-08-02T15:45:19.610: User 'a' logged out.
+INFO - 2019-08-02T16:17:03.104: User 'root' logged out.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - 2019-08-02T16:19:11.924: New user with login 'usersuser' created successfully.
+INFO - 2019-08-02T16:19:11.924: New user with login 'usersuser' created successfully.
+INFO - 2019-08-02T16:19:11.924: New user with login 'usersuser' created successfully.
+INFO - 2019-08-02T16:19:11.924: New user with login 'usersuser' created successfully.
+INFO - 2019-08-02T16:19:11.924: New user with login 'usersuser' created successfully.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+INFO - Failed to create new user.
+DEBUG - 2019-08-02T16:24:13.712: User 'a' logged in successfully.
+DEBUG - 2019-08-02T16:24:13.712: User 'a' logged in successfully.
+DEBUG - 2019-08-02T16:24:13.712: User 'a' logged in successfully.
+DEBUG - 2019-08-02T16:24:13.712: User 'a' logged in successfully.
+DEBUG - 2019-08-02T16:24:13.712: User 'a' logged in successfully.
+DEBUG - 2019-08-02T16:24:13.712: User 'a' logged in successfully.
+DEBUG - 2019-08-02T16:24:13.712: User 'a' logged in successfully.
+ERROR - 2019-08-02T16:24:17.806 Table is loaded.
+ERROR - 2019-08-02T16:24:17.806 Table is loaded.
+ERROR - 2019-08-02T16:24:17.806 Table is loaded.
+ERROR - 2019-08-02T16:24:17.806 Table is loaded.
+ERROR - 2019-08-02T16:24:17.806 Table is loaded.
+ERROR - 2019-08-02T16:24:17.806 Table is loaded.
+ERROR - 2019-08-02T16:24:17.806 Table is loaded.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - 2019-08-02T16:25:17.268: User 'a' logged in successfully.
+ERROR - 2019-08-02T16:25:20.273 Table is loaded.
+DEBUG - Unexpected error occurred.
+DEBUG - Unexpected error occurred.
+DEBUG - 2019-08-02T16:27:13.796: User 'a' logged in successfully.
+ERROR - 2019-08-02T16:27:16.189 Table is loaded.
+DEBUG - 2019-08-02T16:31:09.156: User 'a' logged in successfully.
+ERROR - 2019-08-02T16:31:11.944 Table is loaded.
+DEBUG - 2019-08-02T16:31:19.926: Failed to update entry.
+DEBUG - 2019-08-02T16:31:19.926: Failed to update entry.
+ERROR - 2019-08-02T16:32:31.450 Table is loaded.
+ERROR - 2019-08-02T16:32:31.450 Table is loaded.
+ERROR - 2019-08-02T16:32:31.450 Table is loaded.
+ERROR - 2019-08-02T16:32:31.450 Table is loaded.
+ERROR - 2019-08-02T16:32:31.450 Table is loaded.
+DEBUG - 2019-08-02T16:34:16.863: User 'a' logged in successfully.
+ERROR - 2019-08-02T16:34:18.150 Table is loaded.
+ERROR - 2019-08-02T16:34:24.390 Table is loaded.
+ERROR - 2019-08-02T16:34:24.390 Table is loaded.
+DEBUG - 2019-08-02T16:34:25.473: New entry with url added.
+DEBUG - 2019-08-02T16:34:25.473: New entry with url added.
+DEBUG - 2019-08-02T16:35:39.077: User 'a' logged in successfully.
+ERROR - 2019-08-02T16:35:40.835 Table is loaded.
+ERROR - 2019-08-02T16:35:49.043 Table is loaded.
+ERROR - 2019-08-02T16:35:49.043 Table is loaded.
+DEBUG - 2019-08-02T16:35:50.632: New entry with url qqqqqq added.
+DEBUG - 2019-08-02T16:35:50.632: New entry with url qqqqqq added.
+DEBUG - 2019-08-02T16:43:38.994: User 'a' logged out.
+DEBUG - 2019-08-02T16:43:38.994: User 'a' logged out.
+DEBUG - 2019-08-02T16:43:38.994: User 'a' logged out.
+DEBUG - 2019-08-02T17:02:50.412: User 'a' logged in successfully.
+DEBUG - 2019-08-02T17:02:51.555: User 'a' logged out.
+DEBUG - 2019-08-02T17:02:51.555: User 'a' logged out.
+DEBUG - 2019-08-08T18:15:58.808: User 'a' logged in successfully.
+ERROR - 2019-08-08T18:16:00.782 Table is loaded.
+DEBUG - 2019-08-08T18:16:04.282: User 'a' logged out.
+DEBUG - 2019-08-08T18:16:04.282: User 'a' logged out.
+DEBUG - 2019-08-08T18:17:03.426: User 'root' logged in successfully.
+DEBUG - 2019-08-08T18:17:03.426: User 'root' logged in successfully.
+DEBUG - 2019-08-08T18:17:03.426: User 'root' logged in successfully.
+ERROR - 2019-08-08T18:17:05.975 Table is loaded.
+ERROR - 2019-08-08T18:17:05.975 Table is loaded.
+ERROR - 2019-08-08T18:17:05.975 Table is loaded.
+DEBUG - 2019-08-08T18:22:20.279: Failed to update entry.
+DEBUG - 2019-08-08T18:22:20.279: Failed to update entry.
+DEBUG - 2019-08-08T18:22:20.279: Failed to update entry.
+DEBUG - 2019-08-08T18:22:20.279: Failed to update entry.
+ERROR - 2019-08-08T18:22:23.002 Table is loaded.
+ERROR - 2019-08-08T18:22:23.002 Table is loaded.
+ERROR - 2019-08-08T18:22:23.002 Table is loaded.
+ERROR - 2019-08-08T18:22:23.002 Table is loaded.
+ERROR - 2019-08-08T18:22:23.002 Table is loaded.
+DEBUG - 2019-08-08T18:22:23.838: Entry with Web name 'apple.com' has been updated.
+DEBUG - 2019-08-08T18:22:23.838: Entry with Web name 'apple.com' has been updated.
+DEBUG - 2019-08-08T18:22:23.838: Entry with Web name 'apple.com' has been updated.
+DEBUG - 2019-08-08T18:22:23.838: Entry with Web name 'apple.com' has been updated.
+DEBUG - 2019-08-08T18:22:23.838: Entry with Web name 'apple.com' has been updated.
+DEBUG - 2019-08-08T18:23:05.956: Failed to update entry.
+DEBUG - 2019-08-08T18:23:05.956: Failed to update entry.
+DEBUG - 2019-08-08T18:23:05.956: Failed to update entry.
+DEBUG - 2019-08-08T18:23:05.956: Failed to update entry.
+DEBUG - 2019-08-08T18:23:05.956: Failed to update entry.
+DEBUG - 2019-08-08T18:23:05.956: Failed to update entry.
+ERROR - 2019-08-08T18:23:13.820 Table is loaded.
+ERROR - 2019-08-08T18:23:13.820 Table is loaded.
+ERROR - 2019-08-08T18:23:13.820 Table is loaded.
+ERROR - 2019-08-08T18:23:13.820 Table is loaded.
+ERROR - 2019-08-08T18:23:13.820 Table is loaded.
+ERROR - 2019-08-08T18:23:13.820 Table is loaded.
+ERROR - 2019-08-08T18:23:13.820 Table is loaded.
+DEBUG - 2019-08-08T18:23:15: Entry with Web name 'sdfsdf' has been updated.
+DEBUG - 2019-08-08T18:23:15: Entry with Web name 'sdfsdf' has been updated.
+DEBUG - 2019-08-08T18:23:15: Entry with Web name 'sdfsdf' has been updated.
+DEBUG - 2019-08-08T18:23:15: Entry with Web name 'sdfsdf' has been updated.
+DEBUG - 2019-08-08T18:23:15: Entry with Web name 'sdfsdf' has been updated.
+DEBUG - 2019-08-08T18:23:15: Entry with Web name 'sdfsdf' has been updated.
+DEBUG - 2019-08-08T18:23:15: Entry with Web name 'sdfsdf' has been updated.
+DEBUG - 2019-08-08T18:46:25.599: Couldn't get entry details.
+DEBUG - 2019-08-08T18:46:34.883: Failed to update entry.
+DEBUG - 2019-08-08T18:47:20.610: User 'root' logged in successfully.
+ERROR - 2019-08-08T18:47:21.932 Table is loaded.
+ERROR - 2019-08-08T18:47:27.672 Table is loaded.
+ERROR - 2019-08-08T18:47:27.672 Table is loaded.
+DEBUG - 2019-08-08T18:47:29.158: Entry with Web name 't-systems.lt' has been updated.
+DEBUG - 2019-08-08T18:47:29.158: Entry with Web name 't-systems.lt' has been updated.

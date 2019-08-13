@@ -1,0 +1,77 @@
+.root {
+    -fx-background-color: #c5cae9;
+    -fx-background-size: cover;
+    -fx-padding: 5 8 5 5;
+}
+
+#logout-btn {
+    -fx-alignment: center-right;
+}
+
+#add-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.text-field {
+    -fx-border-color: grey;
+    -fx-border-width: 0 0 1 0; /*top, right, bottom, left*/
+    -fx-background-color: transparent;
+}
+
+.text-area .content {
+    -fx-background-color: #c5cae9;
+}
+
+#add-notes-fld {
+    -fx-border-color: transparent;
+    -fx-max-width: 150;
+    -fx-max-height: 90;
+}
+
+.table-view {
+    -fx-background-color: #D4E2F3;
+    -fx-text-fill: red;
+}
+
+#add-url-fld {
+    -fx-max-width: 150;
+}
+
+#add-user-fld {
+    -fx-max-width: 150;
+}
+
+#add-pass-fld {
+    -fx-max-width: 125;
+}
+
+/** BUTTONS **/
+
+.button {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.button:hover {
+    -fx-background-color: #ABBDE0;
+}
+
+.button:pressed {
+    -fx-background-color: #9fa8da;
+}
+
+.toggle-button {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.toggle-button:hover {
+    -fx-background-color: #ABBDE0;
+}
+
+.toggle-button:selected {
+    -fx-border-color: transparent;
+    -fx-background-color: #9fa8da;
+}
+

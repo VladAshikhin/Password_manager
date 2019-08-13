@@ -1,0 +1,164 @@
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.TextArea?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Tooltip?>
+<BorderPane fx:controller="password.manager.Controller.CabinetController"
+            xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <Button id="logout-btn" onAction="#logOut">Logout</Button>
+    </top>
+    <center>
+        <VBox spacing="15">
+            <children>
+                <TableView fx:id="table" onMouseClicked="#onTableClick" disable="true">
+                    <columns>
+                        <TableColumn text="Web name" prefWidth="100">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="url"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Username" prefWidth="100">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="login"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Password" prefWidth="100">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="password"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Notes" prefWidth="260">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="notes"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+                <HBox spacing="8">
+                    <children>
+                        <Button fx:id="copy" onAction="#copyToClipboard">
+                            <graphic>
+                                <ImageView>
+                                    <image>
+                                        <Image url="icons/copy.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <tooltip><Tooltip text="Copy to clipboard"/></tooltip>
+                        </Button>
+                        <TextField fx:id="generatedPassword" promptText="New password"/>
+                        <Button onAction="#generatePassword" text="Generate password">
+                            <tooltip><Tooltip text="Generate password"/></tooltip>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+
+    </center>
+    <left>
+        <VBox id="manage-block">
+            <children>
+                <Label id="add-label" text="Add a new entry"/>
+                <TextField id="add-url-fld" promptText="URL" fx:id="urlToAdd"/>
+                <TextField id="add-user-fld" promptText="Username" fx:id="usernameToAdd"/>
+                <HBox>
+                    <children>
+                        <TextField id="add-pass-fld" promptText="Password" fx:id="passwordToAdd"/>
+                        <ToggleButton id="show-pass-btn" fx:id="showpass" disable="true">
+                            <graphic>
+                                <ImageView>
+                                    <image>
+                                        <Image url="icons/showpass.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <tooltip><Tooltip text="Show password"/></tooltip>
+                        </ToggleButton>
+                    </children>
+                </HBox>
+                <TextArea id="add-notes-fld" promptText="Notes" fx:id="notesToAdd" wrapText="true"/>
+                <HBox>
+                    <children>
+                        <Button id="add-row-btn" fx:id="add" onAction="#addEntry" disable="true">
+                            <graphic>
+                                <ImageView>
+                                    <image>
+                                        <Image url="icons/add.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <tooltip><Tooltip text="Add entry"/></tooltip>
+                        </Button>
+                        <Button id="update-row-btn" fx:id="update" onAction="#updateEntry" disable="true">
+                            <graphic>
+                                <ImageView>
+                                    <image>
+                                        <Image url="icons/update.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <tooltip><Tooltip text="Update entry"/></tooltip>
+                        </Button>
+                        <Button id="delete-row-btn" fx:id="delete" onAction="#deleteEntry" disable="true">
+                            <graphic>
+                                <ImageView>
+                                    <image>
+                                        <Image url="icons/delete.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <tooltip><Tooltip text="Delete entry"/></tooltip>
+                        </Button>
+                        <Button id="clear-flds-btn" fx:id="clear" onAction="#clearFields" disable="true">
+                            <graphic>
+                            <ImageView>
+                                <image>
+                                    <Image url="icons/clear.png"/>
+                                </image>
+                            </ImageView>
+                        </graphic>
+                            <tooltip><Tooltip text="Clear fields"/></tooltip>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </left>
+    <bottom>
+<!--        <HBox>
+            <children>
+
+            </children>
+        </HBox>-->
+        <HBox>
+            <children>
+                <Button onAction="#loadTable">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="icons/reload.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <tooltip><Tooltip text="Reload table"/></tooltip>
+                </Button>
+
+            </children>
+        </HBox>
+    </bottom>
+    <stylesheets>
+        <URL value="@css/table.css"/>
+    </stylesheets>
+</BorderPane>

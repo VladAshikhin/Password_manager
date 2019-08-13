@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="password.manager.Controller.LoginController"
+            prefHeight="400.0" prefWidth="60.0">
+    <top>
+        <HBox alignment="CENTER">
+            <Label text="" id="login-alert" fx:id="loginAlertLabel"/>
+        </HBox>
+    </top>
+    <center>
+        <GridPane alignment="CENTER" id="login-grid" gridLinesVisible="false" hgap="10" vgap="10">
+            <Label id="login-lbl" text="Login: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextField fx:id="login" id="login" promptText="Your login"  GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Button onAction="#addUser" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="icons/createuser.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+                <tooltip><Tooltip text="Add user"/></tooltip>
+            </Button>
+
+            <Label id="pass-lbl" text="Password: " GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <PasswordField promptText="Your password" fx:id="password" id="password" onKeyPressed="#onEnter" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+            <Button text="Login" fx:id="loginButton" onAction="#handleSubmit" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+        </GridPane>
+    </center>
+    <stylesheets>
+        <URL value="@css/login.css"/>
+    </stylesheets>
+</BorderPane>
