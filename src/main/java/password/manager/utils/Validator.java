@@ -1,8 +1,5 @@
-package password.manager.Utils;
+package password.manager.utils;
 
-/**
- * Class for validation of input data, and creating/updating/deleting entries
- */
 public class Validator {
 
     private static final String URL_BAD_LENGTH = "URL value should be between 3 and 60 characters!";
@@ -12,9 +9,7 @@ public class Validator {
     private static final String LONG_NTS = "Notes field can't be longer than 250 characters!";
     private static final String WRONG_PWD_FORMAT = "Wrong password format!";
 
-    /**
-     * Validates credentials WHILE creating a new user
-     */
+
     public static boolean validateCredentials(String login, String password) {
         if (login.length() < 5 || login.length() > 40 ||
                 password.length() < 5 || password.length() > 40) {
@@ -23,11 +18,8 @@ public class Validator {
         return true;
     }
 
-    /**
-     * Validates credentials WHILE adding and updating new entry
-     */
-    public static boolean validateFields(String url, String login,
-                                         String password, String notes) {
+    public static boolean validateEntryFields(String url, String login,
+                                              String password, String notes) {
         boolean isValid = true;
         if (url.length() < 3 || url.length() > 60) {
             PopUp.fieldValidationAlert(URL_BAD_LENGTH);

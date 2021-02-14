@@ -1,4 +1,4 @@
-package password.manager.Utils;
+package password.manager.utils;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -22,9 +22,6 @@ public class PopUp {
     private static final String CONFIRMATION = "CONFIRMATION";
     private static final String ERROR = "ERROR";
 
-    /**
-     * User created
-     */
     public static void userCreated(String contentText) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(INFORMATION);
@@ -32,9 +29,6 @@ public class PopUp {
         alert.showAndWait();
     }
 
-    /**
-     * Validation of fields while adding new entry
-     */
     static void fieldValidationAlert(String contentText) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(INFORMATION_DIALOG);

@@ -6,7 +6,6 @@ import lombok.Data;
 import javax.persistence.*;
 
 /**
- * Field 'userId' is the owner of current datarow
  * Each user sees only his own datarows
  */
 @Data

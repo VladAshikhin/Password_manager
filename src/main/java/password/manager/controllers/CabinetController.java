@@ -1,11 +1,11 @@
-package password.manager.Controller;
+package password.manager.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import org.apache.log4j.*;
-import password.manager.Utils.PopUp;
-import password.manager.Utils.Utils;
+import password.manager.utils.PopUp;
+import password.manager.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,7 @@ import javafx.scene.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
-import password.manager.Utils.Validator;
+import password.manager.utils.Validator;
 import password.manager.domain.Entity.Datarow;
 
 import java.sql.*;
@@ -80,7 +80,7 @@ public class CabinetController {
 
     public void onTableClick() {
         clearFields();
-        disableButtons(false);
+        setButtonsActive(true);
         if (table.getItems() != null) {
             try {
                 Datarow datarow = (Datarow) table.getSelectionModel().getSelectedItem();
@@ -131,7 +131,7 @@ public class CabinetController {
 
     public void addEntry() {
         initLoggerSettings();
-        boolean isValid = Validator.validateFields(urlToAdd.getText(), usernameToAdd.getText(),
+        boolean isValid = Validator.validateEntryFields(urlToAdd.getText(), usernameToAdd.getText(),
                 passwordToAdd.getText(), notesToAdd.getText());
         loggedInUserId = LoginController.authorizedUserID();
         String currentUrl = urlToAdd.getText();
@@ -183,7 +183,7 @@ public class CabinetController {
             logger.debug(LocalDateTime.now() + ": Failed to update entry.");
         }
 
-        boolean isValid = Validator.validateFields(urlToAdd.getText(), usernameToAdd.getText(),
+        boolean isValid = Validator.validateEntryFields(urlToAdd.getText(), usernameToAdd.getText(),
                 currentPassword, notesToAdd.getText());
 
         Optional<ButtonType> action;
@@ -251,7 +251,7 @@ public class CabinetController {
 
     public void loadTable() {
         loggedInUserId = LoginController.authorizedUserID();
-        disableButtons(false);
+        setButtonsActive(true);
         add.setDisable(false);
         clear.setDisable(false);
         table.setDisable(false);
@@ -310,7 +310,7 @@ public class CabinetController {
 
     public void clearFields() {
         showpass.setSelected(false);
-        disableButtons(true);
+        setButtonsActive(false);
         urlToAdd.clear();
         usernameToAdd.clear();
         passwordToAdd.clear();
@@ -318,9 +318,9 @@ public class CabinetController {
         generatedPassword.clear();
     }
 
-    private void disableButtons(boolean disable) {
-        showpass.setDisable(disable);
-        update.setDisable(disable);
-        delete.setDisable(disable);
+    private void setButtonsActive(boolean active) {
+        showpass.setDisable(active);
+        update.setDisable(active);
+        delete.setDisable(active);
     }
 }

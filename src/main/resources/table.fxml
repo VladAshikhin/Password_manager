@@ -13,7 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.control.Tooltip?>
-<BorderPane fx:controller="password.manager.Controller.CabinetController"
+<BorderPane fx:controller="password.manager.controllers.CabinetController"
             xmlns:fx="http://javafx.com/fxml">
     <top>
         <Button id="logout-btn" onAction="#logOut">Logout</Button>

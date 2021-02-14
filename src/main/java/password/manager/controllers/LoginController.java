@@ -1,4 +1,4 @@
-package password.manager.Controller;
+package password.manager.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +15,7 @@ import org.apache.log4j.Appender;
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
-import password.manager.Utils.PopUp;
+import password.manager.utils.PopUp;
 import password.manager.domain.Entity.User;
 
 import java.sql.Connection;

@@ -328,3 +328,49 @@ ERROR - 2019-08-08T18:47:27.672 Table is loaded.
 ERROR - 2019-08-08T18:47:27.672 Table is loaded.
 DEBUG - 2019-08-08T18:47:29.158: Entry with Web name 't-systems.lt' has been updated.
 DEBUG - 2019-08-08T18:47:29.158: Entry with Web name 't-systems.lt' has been updated.
+WARN - 2021-02-14T20:02:07.065Incorrect login or password!
+WARN - 2021-02-14T20:02:07.070: Access denied.
+DEBUG - 2021-02-14T20:09:42.980: User 'a' logged in successfully.
+DEBUG - 2021-02-14T20:09:42.980: User 'a' logged in successfully.
+ERROR - 2021-02-14T20:09:49.434 Table is loaded.
+ERROR - 2021-02-14T20:09:49.434 Table is loaded.
+ERROR - 2021-02-14T20:10:26.377 Table is loaded.
+ERROR - 2021-02-14T20:10:26.377 Table is loaded.
+ERROR - 2021-02-14T20:10:26.377 Table is loaded.
+DEBUG - 2021-02-14T20:10:27.313: Entry with Web name 'apple.com' has been updated.
+DEBUG - 2021-02-14T20:10:27.313: Entry with Web name 'apple.com' has been updated.
+DEBUG - 2021-02-14T20:10:27.313: Entry with Web name 'apple.com' has been updated.
+ERROR - Error executing SQL query.
+ERROR - Error executing SQL query.
+ERROR - Error executing SQL query.
+ERROR - Error executing SQL query.
+ERROR - 2021-02-14T20:10:52.106 Table is loaded.
+ERROR - 2021-02-14T20:10:52.106 Table is loaded.
+ERROR - 2021-02-14T20:10:52.106 Table is loaded.
+ERROR - 2021-02-14T20:10:52.106 Table is loaded.
+DEBUG - 2021-02-14T20:10:53.414: Entry with Web name 'sssssss' has been updated.
+DEBUG - 2021-02-14T20:10:53.414: Entry with Web name 'sssssss' has been updated.
+DEBUG - 2021-02-14T20:10:53.414: Entry with Web name 'sssssss' has been updated.
+DEBUG - 2021-02-14T20:10:53.414: Entry with Web name 'sssssss' has been updated.
+ERROR - Error executing SQL query.
+ERROR - Error executing SQL query.
+ERROR - Error executing SQL query.
+ERROR - Error executing SQL query.
+ERROR - 2021-02-14T20:11:03.526 Table is loaded.
+ERROR - 2021-02-14T20:11:03.526 Table is loaded.
+ERROR - 2021-02-14T20:11:03.526 Table is loaded.
+ERROR - 2021-02-14T20:11:03.526 Table is loaded.
+ERROR - Error executing SQL query.
+ERROR - Error executing SQL query.
+ERROR - Error executing SQL query.
+ERROR - Error executing SQL query.
+ERROR - 2021-02-14T20:11:08.689 Table is loaded.
+ERROR - 2021-02-14T20:11:08.689 Table is loaded.
+ERROR - 2021-02-14T20:11:08.689 Table is loaded.
+ERROR - 2021-02-14T20:11:08.689 Table is loaded.
+DEBUG - 2021-02-14T20:11:22.704: User 'a' logged in successfully.
+ERROR - 2021-02-14T20:11:26.163 Table is loaded.
+ERROR - 2021-02-14T20:13:16.218 Table is loaded.
+ERROR - 2021-02-14T20:13:16.218 Table is loaded.
+DEBUG - 2021-02-14T20:13:17.200: Entry with Web name 'apple.com' has been updated.
+DEBUG - 2021-02-14T20:13:17.200: Entry with Web name 'apple.com' has been updated.
