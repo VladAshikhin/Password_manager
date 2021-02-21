@@ -1,4 +1,4 @@
-package password.manager.domain.Entity;
+package password.manager.entity;
 
 import lombok.Data;
 

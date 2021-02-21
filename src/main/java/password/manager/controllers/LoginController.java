@@ -16,17 +16,14 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
 import password.manager.utils.PopUp;
-import password.manager.domain.Entity.User;
+import password.manager.entity.User;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class LoginController {
     private Logger logger = Logger.getLogger("Log");
@@ -48,20 +45,14 @@ public class LoginController {
     private static Integer authorizedUserId;
 
     @FXML
-    Label loginAlertLabel;
-
+    private Label loginAlertLabel;
     @FXML
     TextField login;
-
     @FXML
     PasswordField password;
-
     @FXML
     Button loginButton;
 
-    /**
-     * log4j.Logger settings
-     */
     private void initLoggerSettings() {
         try {
             fh = new FileAppender(new SimpleLayout(), "logger.log");
@@ -73,9 +64,6 @@ public class LoginController {
         }
     }
 
-    /**
-     * @return ID of a user authorized
-     */
     static Integer authorizedUserID() {
         if (authorizedUserId != null) {
             return authorizedUserId;
@@ -84,9 +72,6 @@ public class LoginController {
         }
     }
 
-    /**
-     * @return Username of a user authorized
-     */
     static String authorizedUserLogin() {
         if (loggedInUser != null && !loggedInUser.equals("")) {
             return loggedInUser;
@@ -229,6 +214,9 @@ public class LoginController {
     public void handleSubmit(ActionEvent event) throws Exception {
         initLoggerSettings();
 
+        ResourceBundle bundle = ResourceBundle.getBundle("messages");
+        System.out.println(bundle.getString("greeting"));
+
         String inputLogin = login.getText();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("table.fxml"));
@@ -245,9 +233,6 @@ public class LoginController {
         }
     }
 
-    /**
-     * Triggered as onKeyPress method of password field
-     */
     public void onEnter(KeyEvent event) throws Exception {
         if (event.getCode().equals(KeyCode.ENTER)) {
             String inputLogin = login.getText();

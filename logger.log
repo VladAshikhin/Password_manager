@@ -374,3 +374,4 @@ ERROR - 2021-02-14T20:13:16.218 Table is loaded.
 ERROR - 2021-02-14T20:13:16.218 Table is loaded.
 DEBUG - 2021-02-14T20:13:17.200: Entry with Web name 'apple.com' has been updated.
 DEBUG - 2021-02-14T20:13:17.200: Entry with Web name 'apple.com' has been updated.
+DEBUG - 2021-02-21T14:23:24.130: User 'a' logged in successfully.

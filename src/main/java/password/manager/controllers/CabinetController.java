@@ -14,7 +14,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import password.manager.utils.Validator;
-import password.manager.domain.Entity.Datarow;
+import password.manager.entity.Datarow;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -78,6 +78,45 @@ public class CabinetController {
         }
     }
 
+    public void loadTable() {
+        loggedInUserId = LoginController.authorizedUserID();
+        setButtonsActive(true);
+        add.setDisable(false);
+        clear.setDisable(false);
+        table.setDisable(false);
+        clearFields();
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            conn = DriverManager.getConnection(DATABASE_URL);
+            if (loggedInUserId.equals(999)) {
+                pst = conn.prepareStatement(FIND_ALL_DATA);
+            } else {
+                pst = conn.prepareStatement(FIND_ALL_DATA_BY_ID);
+                pst.setInt(1, loggedInUserId);
+            }
+            rs = pst.executeQuery();
+
+            ObservableList<Datarow> data = FXCollections.observableArrayList();
+
+            while (rs.next()) {
+                data.add(new Datarow(
+                        rs.getString("url"),
+                        rs.getString("login"),
+                        Utils.hidePassword(rs.getString("password")),
+                        rs.getString("notes")
+                ));
+                table.setItems(data);
+            }
+
+            pst.close();
+            rs.close();
+        } catch (Exception e) {
+            PopUp.showError("Error loading data.");
+            logger.error(LocalDateTime.now() + "Error executing SQL query.");
+        }
+    }
+
     public void onTableClick() {
         clearFields();
         setButtonsActive(true);
@@ -115,18 +154,6 @@ public class CabinetController {
                 e.printStackTrace();
             }
         }
-    }
-
-    public void logOut(ActionEvent event) throws Exception {
-        initLoggerSettings();
-        String loggedInUser = LoginController.authorizedUserLogin();
-        System.out.println(LocalDateTime.now() + ": User '" + loggedInUser + "' logged out.");
-        logger.debug(LocalDateTime.now() + ": User '" + loggedInUser + "' logged out.");
-
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("login.fxml")));
-        Scene authScene = new Scene(root, 300, 180);
-        currentStage.setScene(authScene);
     }
 
     public void addEntry() {
@@ -249,52 +276,16 @@ public class CabinetController {
         logger.debug(LocalDateTime.now() + ": Entry with Web name '" + webName + "' has been deleted.");
     }
 
-    public void loadTable() {
-        loggedInUserId = LoginController.authorizedUserID();
-        setButtonsActive(true);
-        add.setDisable(false);
-        clear.setDisable(false);
-        table.setDisable(false);
-        clearFields();
+    public void logOut(ActionEvent event) throws Exception {
+        initLoggerSettings();
+        String loggedInUser = LoginController.authorizedUserLogin();
+        System.out.println(LocalDateTime.now() + ": User '" + loggedInUser + "' logged out.");
+        logger.debug(LocalDateTime.now() + ": User '" + loggedInUser + "' logged out.");
 
-        try {
-            Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection(DATABASE_URL);
-            if (loggedInUserId.equals(999)) {
-                pst = conn.prepareStatement(FIND_ALL_DATA);
-            } else {
-                pst = conn.prepareStatement(FIND_ALL_DATA_BY_ID);
-                pst.setInt(1, loggedInUserId);
-            }
-            rs = pst.executeQuery();
-
-            ObservableList<Datarow> data = FXCollections.observableArrayList();
-
-            while (rs.next()) {
-                data.add(new Datarow(
-                        rs.getString("url"),
-                        rs.getString("login"),
-                        Utils.hidePassword(rs.getString("password")),
-                        rs.getString("notes")
-                ));
-                table.setItems(data);
-            }
-
-            pst.close();
-            rs.close();
-        } catch (SQLException e) {
-            PopUp.showError("Error loading data.");
-            logger.error("Error executing SQL query.");
-            e.printStackTrace();
-        } catch (NullPointerException e) {
-            PopUp.showError("No data found!");
-            logger.error("SQL query returned null.");
-            e.printStackTrace();
-        } catch (Exception e) {
-            PopUp.showError("Error loading data.");
-            e.printStackTrace();
-        }
-        logger.error(LocalDateTime.now() + " Table is loaded.");
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("login.fxml")));
+        Scene authScene = new Scene(root, 300, 180);
+        currentStage.setScene(authScene);
     }
 
     public void generatePassword() {

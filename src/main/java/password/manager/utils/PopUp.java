@@ -10,10 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Class for triggering the pop-up alerts
- * param 'contentText' is a message of Alert
- */
 public class PopUp {
 
     private static final String WARNING = "WARNING";

@@ -1,16 +1,14 @@
-package password.manager.domain.Entity;
+package password.manager.entity;
 
 import javafx.beans.property.SimpleStringProperty;
 import lombok.Data;
 
 import javax.persistence.*;
 
-/**
- * Each user sees only his own datarows
- */
 @Data
 public class Datarow {
 
+    //NB: Each user sees only his own datarows
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
