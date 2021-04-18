@@ -15,13 +15,11 @@ import org.apache.log4j.Appender;
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
-import password.manager.utils.PopUp;
+import password.manager.accessors.LoginDataAccessor;
+import password.manager.utils.PopupUtils;
 import password.manager.entity.User;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -29,9 +27,6 @@ public class LoginController {
     private Logger logger = Logger.getLogger("Log");
     private Appender fh;
 
-    private static final String DATABASE_URL = "jdbc:sqlite:C:\\sqlite\\pmanager.db";
-    private static final String SELECT_ALL_USERS = "SELECT * FROM users";
-    private static final String INSERT_USER = "INSERT INTO users (username, password, active) VALUES (?, ?, ?)";
     private static final String CREDS = "Credentials";
     private static final String BAD_CREDENTIALS = "Incorrect login or password!";
     private static final String OK = "Ok";
@@ -39,10 +34,11 @@ public class LoginController {
     private static final String NEW_USER_INVALID = "Login and password fields should be\nbetween 5 and 30 characters!";
     private static final String NEW_USER_CREATED = "New user created successfully!";
     private static final String AUTH_ERROR = "Unknown authentication error occurred.";
-    private static Connection conn = null;
-    private static PreparedStatement pst = null;
+
     private static String loggedInUser;
     private static Integer authorizedUserId;
+
+    private LoginDataAccessor dataAccessor;
 
     @FXML
     private Label loginAlertLabel;
@@ -82,7 +78,7 @@ public class LoginController {
 
     public void addUser() {
         initLoggerSettings();
-        Map<String, Object> newUserObject = PopUp.addUser();
+        Map<String, Object> newUserObject = PopupUtils.addUser();
 
         String newLogin = (String) newUserObject.get("login");
         String newPassword = (String) newUserObject.get("password");
@@ -92,21 +88,15 @@ public class LoginController {
         try {
             if (action.get() == ButtonType.OK) {
                 if (isValid) {
-                    PopUp.userCreated(NEW_USER_CREATED);
+                    PopupUtils.userCreated(NEW_USER_CREATED);
                     logger.info(LocalDateTime.now() + ": New user with login '" + newLogin + "' created successfully.");
                     setAlertTextIncorrectField(OK);
                     try {
-                        Class.forName("org.sqlite.JDBC");
-                        conn = DriverManager.getConnection(DATABASE_URL);
-                        pst = conn.prepareStatement(INSERT_USER);
-                        pst.setString(1, newLogin);
-                        pst.setString(2, newPassword);
-                        pst.setBoolean(3, true);
+                        dataAccessor = new LoginDataAccessor();
+                        dataAccessor.insertUser(newLogin, newPassword);
 
-                        pst.execute();
-                        pst.close();
                     } catch (Exception e) {
-                        e.getCause().printStackTrace();
+                        e.printStackTrace();
                     }
                 } else {
                     // For some reason number of log messages is multiplied
@@ -141,8 +131,8 @@ public class LoginController {
     }
 
     private void clearFields() {
-            login.clear();
-            password.clear();
+        login.clear();
+        password.clear();
     }
 
     private void changeScene(Stage currentStage, Scene newScene) {
@@ -155,28 +145,18 @@ public class LoginController {
 
     private boolean allowAccess() {
         boolean accessGranted = false;
-        boolean credentialsValid = true;
+        boolean credentialsValid = false;
         String inputLogin = login.getText();
         String inputPassword = password.getText();
 
-        List<User> users = new ArrayList<>();
 
         try {
-            Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection(DATABASE_URL);
-            pst = conn.prepareStatement(SELECT_ALL_USERS);
-            ResultSet rs = pst.executeQuery();
 
-            while (rs.next()) {
-                users.add(new User(
-                        rs.getInt("id"),
-                        rs.getString("username"),
-                        rs.getString("password"),
-                        rs.getBoolean("active")
-                ));
-            }
+            dataAccessor = new LoginDataAccessor();
 
-            for (User user : users) {
+            final List<User> userList = dataAccessor.getUserList();
+
+            for (User user : userList) {
                 if (user.isActive()) {
                     if (user.getUsername().equals(inputLogin) && user.getPassword().equals(inputPassword)) {
                         accessGranted = true;
@@ -185,19 +165,14 @@ public class LoginController {
                         authorizedUserId = user.getId();
                         loggedInUser = user.getUsername();
                         break;
-                    } else if (!user.getUsername().equals(inputLogin) || !user.getPassword().equals(inputPassword)) {
-                        credentialsValid = false;
-                        accessGranted = false;
                     } else {
-                        credentialsValid = false;
                         accessGranted = false;
+                        credentialsValid = false;
                     }
-                } else {
-                    accessGranted = false;
-                    credentialsValid = false;
                 }
             }
-            if (!credentialsValid){
+
+            if (!credentialsValid) {
                 setAlertTextIncorrectField(BAD_CREDENTIALS);
                 clearFields();
                 logger.warn(LocalDateTime.now() + BAD_CREDENTIALS);
@@ -211,11 +186,9 @@ public class LoginController {
         return accessGranted;
     }
 
+    // what kind of exception we expect?
     public void handleSubmit(ActionEvent event) throws Exception {
         initLoggerSettings();
-
-        ResourceBundle bundle = ResourceBundle.getBundle("messages");
-        System.out.println(bundle.getString("greeting"));
 
         String inputLogin = login.getText();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

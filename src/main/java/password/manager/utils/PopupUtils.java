@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class PopUp {
+public class PopupUtils {
 
     private static final String WARNING = "WARNING";
     private static final String INFORMATION = "INFORMATION";

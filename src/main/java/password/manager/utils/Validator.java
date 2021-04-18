@@ -21,24 +21,24 @@ public class Validator {
                                               String password, String notes) {
 
         if (password.contains("\u2022")) {
-            PopUp.fieldValidationAlert(WRONG_PWD_FORMAT);
+            PopupUtils.fieldValidationAlert(WRONG_PWD_FORMAT);
             return false;
         }
 
         if (url.length() < 3 || url.length() > 60) {
-            PopUp.fieldValidationAlert(URL_BAD_LENGTH);
+            PopupUtils.fieldValidationAlert(URL_BAD_LENGTH);
             return false;
         } else if (login.chars().allMatch(Character::isDigit)) {
-            PopUp.fieldValidationAlert(NUM_LGN);
+            PopupUtils.fieldValidationAlert(NUM_LGN);
             return false;
         } else if (login.length() < 5 || login.length() > 40) {
-            PopUp.fieldValidationAlert(LGN_BAD_LENGTH);
+            PopupUtils.fieldValidationAlert(LGN_BAD_LENGTH);
             return false;
         } else if (password.length() < 5 || password.length() > 40) {
-            PopUp.fieldValidationAlert(PWD_BAD_LENGTH);
+            PopupUtils.fieldValidationAlert(PWD_BAD_LENGTH);
             return false;
         } else if (notes.length() > 250) {
-            PopUp.fieldValidationAlert(LONG_NOTES);
+            PopupUtils.fieldValidationAlert(LONG_NOTES);
             return false;
         } else {
             return true;

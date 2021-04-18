@@ -25,7 +25,7 @@ public class CabinetController {
 
     private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/kstore?serverTimezone=UTC";
-    private static final String USERNAME = "root";
+    private static final String USERNAME = "vashikhi";
     private static final String PASSWORD = "Maxtomcat91!";
 
     private static final String FIND_ALL_DATA = "SELECT * FROM data";
@@ -89,7 +89,6 @@ public class CabinetController {
         clearFields();
 
         try {
-            //Class.forName("org.mysql.JDBC");
             Class.forName(DB_DRIVER);
 
             Driver driver = new com.mysql.cj.jdbc.Driver();
@@ -119,7 +118,7 @@ public class CabinetController {
             pst.close();
             rs.close();
         } catch (Exception e) {
-            PopUp.showError("Error loading data.");
+            PopupUtils.showError("Error loading data.");
             logger.error(LocalDateTime.now() + " Error executing SQL query.");
             e.printStackTrace();
         }
@@ -157,7 +156,7 @@ public class CabinetController {
             } catch (NullPointerException e) {
                 System.out.println("No data chosen.");
             } catch (Exception e) {
-                PopUp.showError("Unexpected error occurred.");
+                PopupUtils.showError("Unexpected error occurred.");
                 logger.debug("Unexpected error occurred.");
                 e.printStackTrace();
             }
@@ -172,7 +171,7 @@ public class CabinetController {
         String currentUrl = urlToAdd.getText();
         if (isValid) {
             try {
-                Class.forName("org.mysql.JDBC");
+                Class.forName(DB_DRIVER);
 
                 Driver driver = new com.mysql.cj.jdbc.Driver();
                 DriverManager.registerDriver(driver);
@@ -195,7 +194,7 @@ public class CabinetController {
             clearFields();
             table.getItems().clear();
             loadTable();
-            PopUp.entryAdded();
+            PopupUtils.entryAdded();
         }
         logger.debug(LocalDateTime.now() + ": New entry with url '" + currentUrl + "' added.");
     }
@@ -227,7 +226,7 @@ public class CabinetController {
 
         Optional<ButtonType> action;
         if (isValid) {
-            action = PopUp.confirmUpdate();
+            action = PopupUtils.confirmUpdate();
         } else {
             logger.debug(LocalDateTime.now() + ": Failed to update entry.");
             return;
@@ -255,7 +254,7 @@ public class CabinetController {
                     clearFields();
                     table.getItems().clear();
                     loadTable();
-                    PopUp.entryUpdated();
+                    PopupUtils.entryUpdated();
                     logger.debug(LocalDateTime.now() + ": Entry with Web name '" + data.getUrl() + "' has been updated.");
                 }
             }
@@ -265,7 +264,7 @@ public class CabinetController {
     public void deleteEntry() {
         Data data = (Data) table.getSelectionModel().getSelectedItem();
         String webName = data.getUrl();
-        Optional<ButtonType> action = PopUp.confirmDelete();
+        Optional<ButtonType> action = PopupUtils.confirmDelete();
 
         if (action.isPresent()) {
             if (action.get() == ButtonType.OK) {
@@ -279,10 +278,10 @@ public class CabinetController {
                     pst.close();
                 } catch (Exception e) {
                     logger.debug(LocalDateTime.now() + ": " + e.getClass() + " " + DELETE_ERR);
-                    PopUp.showError(DELETE_ERR);
+                    PopupUtils.showError(DELETE_ERR);
                 }
                 clearFields();
-                PopUp.entryDeleted();
+                PopupUtils.entryDeleted();
             }
         }
         logger.debug(LocalDateTime.now() + ": Entry with Web name '" + webName + "' has been deleted.");
