@@ -4,17 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import org.apache.log4j.*;
-import password.manager.utils.PopUp;
-import password.manager.utils.Utils;
+import password.manager.utils.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.*;
 import javafx.stage.Stage;
 import password.manager.utils.Validator;
-import password.manager.entity.Datarow;
+import password.manager.entity.Data;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -25,7 +23,11 @@ public class CabinetController {
     private Logger logger = Logger.getLogger("Log");
     private Appender fh;
 
-    private static final String DATABASE_URL = "jdbc:sqlite:C:\\sqlite\\pmanager.db";
+    private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/kstore?serverTimezone=UTC";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "Maxtomcat91!";
+
     private static final String FIND_ALL_DATA = "SELECT * FROM data";
     private static final String FIND_ALL_DATA_BY_ID = "SELECT * FROM data WHERE user_id = ?";
     private static final String FIND_BY_USER = "SELECT * FROM data WHERE login = ?";
@@ -74,7 +76,7 @@ public class CabinetController {
             fh.setLayout(new SimpleLayout());
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error(LocalDateTime.now() + "Exception occurred:\n" + e);
+            logger.error(LocalDateTime.now() + " Exception occurred:\n" + e);
         }
     }
 
@@ -87,8 +89,13 @@ public class CabinetController {
         clearFields();
 
         try {
-            Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection(DATABASE_URL);
+            //Class.forName("org.mysql.JDBC");
+            Class.forName(DB_DRIVER);
+
+            Driver driver = new com.mysql.cj.jdbc.Driver();
+            DriverManager.registerDriver(driver);
+
+            conn = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
             if (loggedInUserId.equals(999)) {
                 pst = conn.prepareStatement(FIND_ALL_DATA);
             } else {
@@ -97,10 +104,10 @@ public class CabinetController {
             }
             rs = pst.executeQuery();
 
-            ObservableList<Datarow> data = FXCollections.observableArrayList();
+            ObservableList<Data> data = FXCollections.observableArrayList();
 
             while (rs.next()) {
-                data.add(new Datarow(
+                data.add(new Data(
                         rs.getString("url"),
                         rs.getString("login"),
                         Utils.hidePassword(rs.getString("password")),
@@ -113,7 +120,8 @@ public class CabinetController {
             rs.close();
         } catch (Exception e) {
             PopUp.showError("Error loading data.");
-            logger.error(LocalDateTime.now() + "Error executing SQL query.");
+            logger.error(LocalDateTime.now() + " Error executing SQL query.");
+            e.printStackTrace();
         }
     }
 
@@ -122,10 +130,10 @@ public class CabinetController {
         setButtonsActive(true);
         if (table.getItems() != null) {
             try {
-                Datarow datarow = (Datarow) table.getSelectionModel().getSelectedItem();
-                if (datarow != null) {
+                Data data = (Data) table.getSelectionModel().getSelectedItem();
+                if (data != null) {
                     pst = conn.prepareStatement(FIND_BY_USER);
-                    pst.setString(1, datarow.getLogin());
+                    pst.setString(1, data.getLogin());
 
                     rs = pst.executeQuery();
 
@@ -164,8 +172,12 @@ public class CabinetController {
         String currentUrl = urlToAdd.getText();
         if (isValid) {
             try {
-                Class.forName("org.sqlite.JDBC");
-                conn = DriverManager.getConnection(DATABASE_URL);
+                Class.forName("org.mysql.JDBC");
+
+                Driver driver = new com.mysql.cj.jdbc.Driver();
+                DriverManager.registerDriver(driver);
+
+                conn = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
                 pst = conn.prepareStatement(INSERT_INTO_DATA);
 
                 pst.setString(1, currentUrl);
@@ -190,7 +202,7 @@ public class CabinetController {
 
     public void updateEntry() {
         initLoggerSettings();
-        Datarow datarow = (Datarow) table.getSelectionModel().getSelectedItem();
+        Data data = (Data) table.getSelectionModel().getSelectedItem();
 
         String currentPassword = "";
 
@@ -244,24 +256,24 @@ public class CabinetController {
                     table.getItems().clear();
                     loadTable();
                     PopUp.entryUpdated();
-                    logger.debug(LocalDateTime.now() + ": Entry with Web name '" + datarow.getUrl() + "' has been updated.");
+                    logger.debug(LocalDateTime.now() + ": Entry with Web name '" + data.getUrl() + "' has been updated.");
                 }
             }
         }
     }
 
     public void deleteEntry() {
-        Datarow datarow = (Datarow) table.getSelectionModel().getSelectedItem();
-        String webName = datarow.getUrl();
+        Data data = (Data) table.getSelectionModel().getSelectedItem();
+        String webName = data.getUrl();
         Optional<ButtonType> action = PopUp.confirmDelete();
 
         if (action.isPresent()) {
             if (action.get() == ButtonType.OK) {
                 try {
-                    table.getItems().remove(datarow);
+                    table.getItems().remove(data);
 
                     pst = conn.prepareStatement(DELETE_FROM_DATA);
-                    pst.setString(1, datarow.getLogin());
+                    pst.setString(1, data.getLogin());
 
                     pst.executeUpdate();
                     pst.close();
@@ -309,9 +321,9 @@ public class CabinetController {
         generatedPassword.clear();
     }
 
-    private void setButtonsActive(boolean active) {
-        showpass.setDisable(active);
-        update.setDisable(active);
-        delete.setDisable(active);
+    private void setButtonsActive(boolean value) {
+        showpass.setDisable(value);
+        update.setDisable(value);
+        delete.setDisable(value);
     }
 }

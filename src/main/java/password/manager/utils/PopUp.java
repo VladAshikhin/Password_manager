@@ -18,6 +18,10 @@ public class PopUp {
     private static final String CONFIRMATION = "CONFIRMATION";
     private static final String ERROR = "ERROR";
 
+    // TODO refactor
+    // make 1 generic method which accepts message and shows it
+    // showInfoBar / showErrorBar
+
     public static void userCreated(String contentText) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(INFORMATION);

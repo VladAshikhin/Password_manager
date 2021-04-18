@@ -15,7 +15,7 @@ public class Main extends Application {
         BasicConfigurator.configure();
 
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("login.fxml"));
-        primaryStage.setTitle("Password manager");
+        primaryStage.setTitle("KStore");
         primaryStage.setScene(new Scene(root, 330, 180));
         primaryStage.getIcons().add(new Image("icons/main.png"));
         primaryStage.setResizable(false);

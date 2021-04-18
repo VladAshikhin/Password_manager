@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
+@Table(name = "USER")
 public class User {
 
     @Id
@@ -19,7 +20,6 @@ public class User {
     private String password;
 
     private boolean active = true;
-
 
     public Integer getId() {
         return id;
