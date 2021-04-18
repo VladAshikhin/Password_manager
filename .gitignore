@@ -3,4 +3,4 @@ target/
 *.iml
 *.gitignore
 PROMPT.txt
-*.log
+logger.log
