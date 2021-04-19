@@ -19,10 +19,15 @@ public class CabinetDataAccessor {
 
     private static final String FIND_ALL_DATA = "SELECT * FROM data";
     private static final String FIND_ALL_DATA_BY_ID = "SELECT * FROM data WHERE user_id = ?";
+    private static final String INSERT_INTO_DATA = "INSERT INTO data (url, login, password, notes, user_id) VALUES (?, ?, ?, ?, ?)";
+    private static final String GET_ID = "SELECT id FROM data WHERE url = ? and login = ?";
 
-    private Connection connection;
+    private static final String DELETE_BY_ID = "DELETE FROM data WHERE id = ?";
+
+
+    private final Connection connection;
     private PreparedStatement pst;
-    private static ResultSet rs;
+    private ResultSet rs;
 
     public CabinetDataAccessor() throws SQLException, ClassNotFoundException {
         Class.forName(DB_DRIVER);
@@ -57,5 +62,40 @@ public class CabinetDataAccessor {
         rs.close();
 
         return data;
+    }
+
+    public Data addEntry(Data newEntry) throws SQLException {
+
+        pst = connection.prepareStatement(INSERT_INTO_DATA);
+
+        pst.setString(1, newEntry.getUrl());
+        pst.setString(2, newEntry.getLogin());
+        pst.setString(3, newEntry.getPassword());
+        pst.setString(4, newEntry.getNotes());
+        pst.setInt(5, newEntry.getUserId());
+
+        pst = connection.prepareStatement(GET_ID);
+        pst.setString(1, newEntry.getUrl());
+        pst.setString(2, newEntry.getLogin());
+
+        rs = pst.executeQuery();
+
+        while (rs.next()) {
+            newEntry.setId(rs.getInt("id"));
+        }
+        newEntry.setHiddenPassword(Utils.hidePassword(newEntry.getPassword()));
+
+        pst.execute();
+        pst.close();
+
+        return newEntry;
+    }
+
+    public void deleteEntry(Data data) throws SQLException {
+        pst = connection.prepareStatement(DELETE_BY_ID);
+
+        pst.setInt(1, data.getId());
+        pst.executeUpdate();
+        pst.close();
     }
 }

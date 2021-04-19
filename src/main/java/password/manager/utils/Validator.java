@@ -1,5 +1,7 @@
 package password.manager.utils;
 
+import password.manager.entity.Data;
+
 public class Validator {
 
     //TODO unify names
@@ -17,27 +19,26 @@ public class Validator {
     }
 
     //TODO split to several methods like 'validateUrl'/'validateLogin' and invoke from here
-    public static boolean validateEntryFields(String url, String login,
-                                              String password, String notes) {
+    public static boolean validateEntryFields(Data entry) {
 
-        if (password.contains("\u2022")) {
+        if (entry.getPassword().contains("\u2022")) {
             PopupUtils.fieldValidationAlert(WRONG_PWD_FORMAT);
             return false;
         }
 
-        if (url.length() < 3 || url.length() > 60) {
+        if (entry.getUrl().length() < 3 || entry.getUrl().length() > 60) {
             PopupUtils.fieldValidationAlert(URL_BAD_LENGTH);
             return false;
-        } else if (login.chars().allMatch(Character::isDigit)) {
+        } else if (entry.getLogin().chars().allMatch(Character::isDigit)) {
             PopupUtils.fieldValidationAlert(NUM_LGN);
             return false;
-        } else if (login.length() < 5 || login.length() > 40) {
+        } else if (entry.getLogin().length() < 5 || entry.getLogin().length() > 40) {
             PopupUtils.fieldValidationAlert(LGN_BAD_LENGTH);
             return false;
-        } else if (password.length() < 5 || password.length() > 40) {
+        } else if (entry.getPassword().length() < 5 || entry.getPassword().length() > 40) {
             PopupUtils.fieldValidationAlert(PWD_BAD_LENGTH);
             return false;
-        } else if (notes.length() > 250) {
+        } else if (entry.getNotes().length() > 250) {
             PopupUtils.fieldValidationAlert(LONG_NOTES);
             return false;
         } else {

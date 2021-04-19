@@ -144,7 +144,7 @@
         </HBox>-->
         <HBox>
             <children>
-                <Button onAction="#loadTable">
+                <Button onAction="#refreshTable">
                     <graphic>
                         <ImageView>
                             <image>

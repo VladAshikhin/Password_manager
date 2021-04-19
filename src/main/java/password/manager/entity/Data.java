@@ -29,6 +29,14 @@ public class Data {
 
     private Integer userId;
 
+    public Data(String url, String login, String password, String notes, Integer userId) {
+        this.url = url;
+        this.login = login;
+        this.password = password;
+        this.notes = notes;
+        this.userId = userId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

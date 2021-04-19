@@ -22,31 +22,19 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class CabinetController {
-    private Logger logger = Logger.getLogger("Log");
-    private Appender fh;
-
-    private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/kstore?serverTimezone=UTC";
-    private static final String USERNAME = "vashikhi";
-    private static final String PASSWORD = "Maxtomcat91!";
-
-    private static final String FIND_ALL_DATA = "SELECT * FROM data";
-    private static final String FIND_ALL_DATA_BY_ID = "SELECT * FROM data WHERE user_id = ?";
-    private static final String FIND_BY_USER = "SELECT * FROM data WHERE login = ?";
-    private static final String INSERT_INTO_DATA = "INSERT INTO data (url, login, password, notes, user_id) VALUES (?, ?, ?, ?, ?)";
-    private static final String DELETE_FROM_DATA = "DELETE FROM data WHERE login = ?";
-    private static final String UPDATE_DATA = "UPDATE data SET url = ?, login = ?, password = ?, notes = ? WHERE url = ?";
-    private static final String GET_PASS = "SELECT password FROM data WHERE url = ? and login = ?";
-
-    private static final String DELETE_ERR = "Error while deleting entry.";
-
-    private static Connection conn = null;
-    private static PreparedStatement pst = null;
-    private static ResultSet rs = null;
-    private static Integer loggedInUserId;
 
     private CabinetDataAccessor dataAccessor;
     private List<Data> allData;
+
+    private Logger logger = Logger.getLogger("Log");
+    private Appender fh;
+
+    private static final String UPDATE_DATA = "UPDATE data SET url = ?, login = ?, password = ?, notes = ? WHERE url = ?";
+    private static final String DELETE_ERR = "Error while deleting entry.";
+
+    private Connection conn = null;
+    private PreparedStatement pst = null;
+    private Integer loggedInUserId;
 
     @FXML
     TableView table;
@@ -85,10 +73,16 @@ public class CabinetController {
         }
     }
 
-    public void loadTable() {
+    public void refreshTable() {
+        initLoggerSettings();
+
+        if (table.getItems() != null) {
+            table.getItems().clear();
+        }
+
         allData = new ArrayList<>();
         loggedInUserId = LoginController.authorizedUserID();
-        setButtonsActive(true);
+        deactivateButtons(true);
         add.setDisable(false);
         clear.setDisable(false);
         table.setDisable(false);
@@ -117,7 +111,7 @@ public class CabinetController {
 
     public void onTableClick() {
         clearFields();
-        setButtonsActive(true);
+        deactivateButtons(false);
         if (table.getItems() != null) {
             try {
                 Data selectedItem = (Data) table.getSelectionModel().getSelectedItem();
@@ -146,65 +140,35 @@ public class CabinetController {
     }
 
     public void addEntry() {
-        initLoggerSettings();
-        boolean isValid = Validator.validateEntryFields(urlToAdd.getText(), usernameToAdd.getText(),
-                passwordToAdd.getText(), notesToAdd.getText());
         loggedInUserId = LoginController.authorizedUserID();
+        Data newEntry = new Data(urlToAdd.getText(), usernameToAdd.getText(),
+                passwordToAdd.getText(), notesToAdd.getText(), loggedInUserId);
+
+        boolean isValid = Validator.validateEntryFields(newEntry);
+
         String currentUrl = urlToAdd.getText();
         if (isValid) {
             try {
-                Class.forName(DB_DRIVER);
-
-                Driver driver = new com.mysql.cj.jdbc.Driver();
-                DriverManager.registerDriver(driver);
-
-                conn = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-                pst = conn.prepareStatement(INSERT_INTO_DATA);
-
-                pst.setString(1, currentUrl);
-                pst.setString(2, usernameToAdd.getText());
-                pst.setString(3, passwordToAdd.getText());
-                pst.setString(4, notesToAdd.getText());
-                pst.setInt(5, loggedInUserId);
-
-                pst.execute();
-                pst.close();
+                Data savedEntry = dataAccessor.addEntry(newEntry);
+                allData.add(savedEntry);
             } catch (Exception e) {
-                System.out.println("======= " + e.getClass() + " =======");
+                PopupUtils.showError("Trying to add new entry but error occurred.");
                 e.printStackTrace();
             }
             clearFields();
-            table.getItems().clear();
-            loadTable();
+            refreshTable();
             PopupUtils.entryAdded();
         }
         logger.debug(LocalDateTime.now() + ": New entry with url '" + currentUrl + "' added.");
     }
 
     public void updateEntry() {
-        initLoggerSettings();
-        Data data = (Data) table.getSelectionModel().getSelectedItem();
+        Data selectedItem = (Data) table.getSelectionModel().getSelectedItem();
+        Data data = getCurrentEntry(selectedItem);
 
         String currentPassword = "";
 
-        try {
-            pst = conn.prepareStatement(GET_PASS);
-            pst.setString(1, urlToAdd.getText());
-            pst.setString(2, usernameToAdd.getText());
-
-            rs = pst.executeQuery();
-
-            currentPassword = rs.getString("password");
-
-        } catch (SQLException e) {
-            logger.debug(LocalDateTime.now() + ": Couldn't get entry details.");
-            e.printStackTrace();
-        } catch (Exception e) {
-            logger.debug(LocalDateTime.now() + ": Failed to update entry.");
-        }
-
-        boolean isValid = Validator.validateEntryFields(urlToAdd.getText(), usernameToAdd.getText(),
-                currentPassword, notesToAdd.getText());
+        boolean isValid = Validator.validateEntryFields(data);
 
         Optional<ButtonType> action;
         if (isValid) {
@@ -235,9 +199,9 @@ public class CabinetController {
                     }
                     clearFields();
                     table.getItems().clear();
-                    loadTable();
+                    refreshTable();
                     PopupUtils.entryUpdated();
-                    logger.debug(LocalDateTime.now() + ": Entry with Web name '" + data.getUrl() + "' has been updated.");
+                    logger.debug(LocalDateTime.now() + ": Entry with Web name '" + selectedItem.getUrl() + "' has been updated.");
                 }
             }
         }
@@ -245,28 +209,25 @@ public class CabinetController {
 
     public void deleteEntry() {
         Data data = (Data) table.getSelectionModel().getSelectedItem();
-        String webName = data.getUrl();
+        Data currentItem = getCurrentEntry(data);
         Optional<ButtonType> action = PopupUtils.confirmDelete();
 
         if (action.isPresent()) {
             if (action.get() == ButtonType.OK) {
                 try {
+                    dataAccessor.deleteEntry(currentItem);
+                    allData.remove(currentItem);
+
                     table.getItems().remove(data);
-
-                    pst = conn.prepareStatement(DELETE_FROM_DATA);
-                    pst.setString(1, data.getLogin());
-
-                    pst.executeUpdate();
-                    pst.close();
                 } catch (Exception e) {
-                    logger.debug(LocalDateTime.now() + ": " + e.getClass() + " " + DELETE_ERR);
+                    logger.debug(LocalDateTime.now() + ": " + DELETE_ERR);
                     PopupUtils.showError(DELETE_ERR);
                 }
                 clearFields();
                 PopupUtils.entryDeleted();
             }
         }
-        logger.debug(LocalDateTime.now() + ": Entry with Web name '" + webName + "' has been deleted.");
+        logger.debug(LocalDateTime.now() + ": Entry" + currentItem.getId() + " has been deleted.");
     }
 
     public void logOut(ActionEvent event) throws Exception {
@@ -295,7 +256,7 @@ public class CabinetController {
 
     public void clearFields() {
         showpass.setSelected(false);
-        setButtonsActive(false);
+        deactivateButtons(true);
         urlToAdd.clear();
         usernameToAdd.clear();
         passwordToAdd.clear();
@@ -303,7 +264,7 @@ public class CabinetController {
         generatedPassword.clear();
     }
 
-    private void setButtonsActive(boolean value) {
+    private void deactivateButtons(boolean value) {
         showpass.setDisable(value);
         update.setDisable(value);
         delete.setDisable(value);
