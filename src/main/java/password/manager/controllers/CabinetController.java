@@ -1,9 +1,9 @@
 package password.manager.controllers;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import org.apache.log4j.*;
+import password.manager.accessors.CabinetDataAccessor;
 import password.manager.utils.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +16,8 @@ import password.manager.entity.Data;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -42,6 +44,9 @@ public class CabinetController {
     private static PreparedStatement pst = null;
     private static ResultSet rs = null;
     private static Integer loggedInUserId;
+
+    private CabinetDataAccessor dataAccessor;
+    private List<Data> allData;
 
     @FXML
     TableView table;
@@ -81,6 +86,7 @@ public class CabinetController {
     }
 
     public void loadTable() {
+        allData = new ArrayList<>();
         loggedInUserId = LoginController.authorizedUserID();
         setButtonsActive(true);
         add.setDisable(false);
@@ -89,34 +95,11 @@ public class CabinetController {
         clearFields();
 
         try {
-            Class.forName(DB_DRIVER);
+            dataAccessor = new CabinetDataAccessor();
+            ObservableList<Data> data = dataAccessor.getAllData(loggedInUserId);
+            allData.addAll(data);
+            table.setItems(data);
 
-            Driver driver = new com.mysql.cj.jdbc.Driver();
-            DriverManager.registerDriver(driver);
-
-            conn = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-            if (loggedInUserId.equals(999)) {
-                pst = conn.prepareStatement(FIND_ALL_DATA);
-            } else {
-                pst = conn.prepareStatement(FIND_ALL_DATA_BY_ID);
-                pst.setInt(1, loggedInUserId);
-            }
-            rs = pst.executeQuery();
-
-            ObservableList<Data> data = FXCollections.observableArrayList();
-
-            while (rs.next()) {
-                data.add(new Data(
-                        rs.getString("url"),
-                        rs.getString("login"),
-                        Utils.hidePassword(rs.getString("password")),
-                        rs.getString("notes")
-                ));
-                table.setItems(data);
-            }
-
-            pst.close();
-            rs.close();
         } catch (Exception e) {
             PopupUtils.showError("Error loading data.");
             logger.error(LocalDateTime.now() + " Error executing SQL query.");
@@ -124,40 +107,39 @@ public class CabinetController {
         }
     }
 
+    public Data getCurrentEntry(Data tableEntry) {
+        return allData.stream()
+                .filter(it -> it.equals(tableEntry))
+                .findFirst()
+                .orElse(null);
+    }
+
+
     public void onTableClick() {
         clearFields();
         setButtonsActive(true);
         if (table.getItems() != null) {
             try {
-                Data data = (Data) table.getSelectionModel().getSelectedItem();
-                if (data != null) {
-                    pst = conn.prepareStatement(FIND_BY_USER);
-                    pst.setString(1, data.getLogin());
+                Data selectedItem = (Data) table.getSelectionModel().getSelectedItem();
+                Data currentItem = getCurrentEntry(selectedItem);
 
-                    rs = pst.executeQuery();
-
-                    while (rs.next()) {
-                        urlToAdd.setText(rs.getString("url"));
-                        usernameToAdd.setText(rs.getString("login"));
-                        passwordToAdd.setText(rs.getString("password"));
-                        notesToAdd.setText(rs.getString("notes"));
-                    }
-                    String currentPasswordValue = passwordToAdd.getText();
-                    passwordToAdd.setText(Utils.hidePassword(currentPasswordValue));
+                if (currentItem != null) {
+                    urlToAdd.setText(currentItem.getUrl());
+                    usernameToAdd.setText(currentItem.getLogin());
+                    passwordToAdd.setText(currentItem.getHiddenPassword());
+                    notesToAdd.setText(currentItem.getNotes());
 
                     showpass.selectedProperty().addListener((observable, oldValue, newValue) -> {
                         if (showpass.isSelected()) {
-                            passwordToAdd.setText(currentPasswordValue);
+                            passwordToAdd.setText(currentItem.getPassword());
                         } else {
-                            passwordToAdd.setText(Utils.hidePassword(currentPasswordValue));
+                            passwordToAdd.setText(currentItem.getHiddenPassword());
                         }
                     });
                 }
-            } catch (NullPointerException e) {
-                System.out.println("No data chosen.");
             } catch (Exception e) {
-                PopupUtils.showError("Unexpected error occurred.");
-                logger.debug("Unexpected error occurred.");
+                PopupUtils.showError("Trying to display data in table but error occurred.");
+                logger.debug("Trying to display data in table but error occurred.");
                 e.printStackTrace();
             }
         }
@@ -298,6 +280,7 @@ public class CabinetController {
         Scene authScene = new Scene(root, 300, 180);
         currentStage.setScene(authScene);
     }
+
 
     public void generatePassword() {
         generatedPassword.setText(Utils.generatePassword());

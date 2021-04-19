@@ -63,9 +63,6 @@ public class LoginDataAccessor {
                     rs.getBoolean("active")
             ));
         }
-        for (User user : users) {
-            System.out.println("User: " + user.getUsername());
-        }
         return users;
     }
 
