@@ -12,76 +12,37 @@ import java.util.Optional;
 
 public class PopupUtils {
 
-    private static final String WARNING = "WARNING";
     private static final String INFORMATION = "INFORMATION";
-    private static final String INFORMATION_DIALOG = "Information dialog";
     private static final String CONFIRMATION = "CONFIRMATION";
+    private static final String WARNING = "WARNING";
     private static final String ERROR = "ERROR";
 
-    // TODO refactor
-    // make 1 generic method which accepts message and shows it
-    // showInfoBar / showErrorBar
-
-    public static void userCreated(String contentText) {
+    public static void showInformationDialog(String contentText) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(INFORMATION);
         alert.setContentText(contentText);
         alert.showAndWait();
     }
 
-    static void fieldValidationAlert(String contentText) {
+    public static Optional<ButtonType> showConfirmationDialog(String contentText) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(CONFIRMATION);
+        alert.setHeaderText(CONFIRMATION);
+        alert.setContentText(contentText);
+        return alert.showAndWait();
+    }
+
+    static void showWarningDialog(String contentText) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(INFORMATION_DIALOG);
+        alert.setTitle(WARNING);
         alert.setHeaderText(WARNING);
         alert.setContentText(contentText);
         alert.showAndWait();
     }
 
-    public static void entryAdded() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(INFORMATION_DIALOG);
-        alert.setHeaderText(INFORMATION);
-        alert.setContentText("Entry has been added successfully!");
-        alert.showAndWait();
-    }
-
-    public static void entryUpdated() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(INFORMATION_DIALOG);
-        alert.setHeaderText(INFORMATION);
-        alert.setContentText("Entry has been updated successfully!");
-        alert.showAndWait();
-    }
-
-    public static void entryDeleted() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(INFORMATION_DIALOG);
-        alert.setHeaderText(INFORMATION);
-        alert.setContentText("Entry has been deleted successfully!");
-        alert.showAndWait();
-    }
-
-    public static Optional<ButtonType> confirmDelete() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation of entry deletion");
-        alert.setHeaderText(CONFIRMATION);
-        alert.setContentText("Are you sure you want to delete entry?");
-        Optional<ButtonType> action = alert.showAndWait();
-        return action;
-    }
-
-    public static Optional<ButtonType> confirmUpdate() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation of entry update");
-        alert.setHeaderText(CONFIRMATION);
-        alert.setContentText("Are you sure you want to update entry?");
-        Optional<ButtonType> action = alert.showAndWait();
-        return action;
-    }
-
-    public static void showError(String error) {
+    public static void showErrorDialog(String error) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
+        alert.setTitle(ERROR);
         alert.setHeaderText(ERROR);
         alert.setContentText(error);
         alert.showAndWait();

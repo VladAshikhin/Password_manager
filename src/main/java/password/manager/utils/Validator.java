@@ -14,6 +14,11 @@ public class Validator {
 
 
     public static boolean validateCredentials(String login, String password) {
+
+        if (login.length() < 5 || login.length() > 40) {
+
+        }
+
         return login.length() >= 5 && login.length() <= 40 &&
                 password.length() >= 5 && password.length() <= 40;
     }
@@ -22,24 +27,24 @@ public class Validator {
     public static boolean validateEntryFields(Data entry) {
 
         if (entry.getPassword().contains("\u2022")) {
-            PopupUtils.fieldValidationAlert(WRONG_PWD_FORMAT);
+            PopupUtils.showWarningDialog(WRONG_PWD_FORMAT);
             return false;
         }
 
         if (entry.getUrl().length() < 3 || entry.getUrl().length() > 60) {
-            PopupUtils.fieldValidationAlert(URL_BAD_LENGTH);
+            PopupUtils.showWarningDialog(URL_BAD_LENGTH);
             return false;
         } else if (entry.getLogin().chars().allMatch(Character::isDigit)) {
-            PopupUtils.fieldValidationAlert(NUM_LGN);
+            PopupUtils.showWarningDialog(NUM_LGN);
             return false;
         } else if (entry.getLogin().length() < 5 || entry.getLogin().length() > 40) {
-            PopupUtils.fieldValidationAlert(LGN_BAD_LENGTH);
+            PopupUtils.showWarningDialog(LGN_BAD_LENGTH);
             return false;
         } else if (entry.getPassword().length() < 5 || entry.getPassword().length() > 40) {
-            PopupUtils.fieldValidationAlert(PWD_BAD_LENGTH);
+            PopupUtils.showWarningDialog(PWD_BAD_LENGTH);
             return false;
         } else if (entry.getNotes().length() > 250) {
-            PopupUtils.fieldValidationAlert(LONG_NOTES);
+            PopupUtils.showWarningDialog(LONG_NOTES);
             return false;
         } else {
             return true;

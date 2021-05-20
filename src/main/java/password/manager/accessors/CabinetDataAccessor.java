@@ -74,6 +74,8 @@ public class CabinetDataAccessor {
         pst.setString(4, newEntry.getNotes());
         pst.setInt(5, newEntry.getUserId());
 
+        pst.execute();
+
         pst = connection.prepareStatement(GET_ID);
         pst.setString(1, newEntry.getUrl());
         pst.setString(2, newEntry.getLogin());
@@ -85,7 +87,7 @@ public class CabinetDataAccessor {
         }
         newEntry.setHiddenPassword(Utils.hidePassword(newEntry.getPassword()));
 
-        pst.execute();
+
         pst.close();
 
         return newEntry;

@@ -19,7 +19,6 @@ import password.manager.accessors.LoginDataAccessor;
 import password.manager.utils.PopupUtils;
 import password.manager.entity.User;
 
-import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -32,7 +31,7 @@ public class LoginController {
     private static final String OK = "Ok";
     private static final String NO_SUCH_USER = "User doesn't exist!";
     private static final String NEW_USER_INVALID = "Login and password fields should be\nbetween 5 and 30 characters!";
-    private static final String NEW_USER_CREATED = "New user created successfully!";
+    private static final String NEW_USER_CREATED = "New user created successfully.";
     private static final String AUTH_ERROR = "Unknown authentication error occurred.";
 
     private static String loggedInUser;
@@ -88,7 +87,7 @@ public class LoginController {
         try {
             if (action.get() == ButtonType.OK) {
                 if (isValid) {
-                    PopupUtils.userCreated(NEW_USER_CREATED);
+                    PopupUtils.showInformationDialog(NEW_USER_CREATED);
                     logger.info(LocalDateTime.now() + ": New user with login '" + newLogin + "' created successfully.");
                     setAlertTextIncorrectField(OK);
                     try {

@@ -79,8 +79,9 @@ public class CabinetController {
         if (table.getItems() != null) {
             table.getItems().clear();
         }
-
-        allData = new ArrayList<>();
+        if (allData == null) {
+            allData = new ArrayList<>();
+        }
         loggedInUserId = LoginController.authorizedUserID();
         deactivateButtons(true);
         add.setDisable(false);
@@ -89,13 +90,16 @@ public class CabinetController {
         clearFields();
 
         try {
-            dataAccessor = new CabinetDataAccessor();
+            if (dataAccessor == null) {
+                dataAccessor = new CabinetDataAccessor();
+            }
             ObservableList<Data> data = dataAccessor.getAllData(loggedInUserId);
+            System.out.println("Data fetched from DB size " + data.size());
             allData.addAll(data);
             table.setItems(data);
 
         } catch (Exception e) {
-            PopupUtils.showError("Error loading data.");
+            PopupUtils.showErrorDialog("Error loading data.");
             logger.error(LocalDateTime.now() + " Error executing SQL query.");
             e.printStackTrace();
         }
@@ -132,7 +136,7 @@ public class CabinetController {
                     });
                 }
             } catch (Exception e) {
-                PopupUtils.showError("Trying to display data in table but error occurred.");
+                PopupUtils.showErrorDialog("Trying to display data in table but error occurred.");
                 logger.debug("Trying to display data in table but error occurred.");
                 e.printStackTrace();
             }
@@ -152,12 +156,12 @@ public class CabinetController {
                 Data savedEntry = dataAccessor.addEntry(newEntry);
                 allData.add(savedEntry);
             } catch (Exception e) {
-                PopupUtils.showError("Trying to add new entry but error occurred.");
+                PopupUtils.showErrorDialog("Trying to add new entry but error occurred.");
                 e.printStackTrace();
             }
             clearFields();
             refreshTable();
-            PopupUtils.entryAdded();
+            PopupUtils.showInformationDialog("Entry has been added successfully.");
         }
         logger.debug(LocalDateTime.now() + ": New entry with url '" + currentUrl + "' added.");
     }
@@ -172,7 +176,7 @@ public class CabinetController {
 
         Optional<ButtonType> action;
         if (isValid) {
-            action = PopupUtils.confirmUpdate();
+            action = PopupUtils.showConfirmationDialog("Are you sure you want to update entry?");
         } else {
             logger.debug(LocalDateTime.now() + ": Failed to update entry.");
             return;
@@ -200,7 +204,7 @@ public class CabinetController {
                     clearFields();
                     table.getItems().clear();
                     refreshTable();
-                    PopupUtils.entryUpdated();
+                    PopupUtils.showInformationDialog("Entry has been updated successfully.");
                     logger.debug(LocalDateTime.now() + ": Entry with Web name '" + selectedItem.getUrl() + "' has been updated.");
                 }
             }
@@ -210,7 +214,7 @@ public class CabinetController {
     public void deleteEntry() {
         Data data = (Data) table.getSelectionModel().getSelectedItem();
         Data currentItem = getCurrentEntry(data);
-        Optional<ButtonType> action = PopupUtils.confirmDelete();
+        Optional<ButtonType> action = PopupUtils.showConfirmationDialog("Are you sure you want to delete entry?");
 
         if (action.isPresent()) {
             if (action.get() == ButtonType.OK) {
@@ -221,10 +225,10 @@ public class CabinetController {
                     table.getItems().remove(data);
                 } catch (Exception e) {
                     logger.debug(LocalDateTime.now() + ": " + DELETE_ERR);
-                    PopupUtils.showError(DELETE_ERR);
+                    PopupUtils.showErrorDialog(DELETE_ERR);
                 }
                 clearFields();
-                PopupUtils.entryDeleted();
+                PopupUtils.showInformationDialog("Entry has been deleted successfully.");
             }
         }
         logger.debug(LocalDateTime.now() + ": Entry" + currentItem.getId() + " has been deleted.");
